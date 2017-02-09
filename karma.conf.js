@@ -15,7 +15,8 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-        JASMINE, JASMINE_ADAPTER,
+        'https://maps.googleapis.com/maps/api/js?sensor=false',
+        'src/main/scripts/gMapApp.js',
       'test/main/scripts/gMapAppSpec.js',
       {pattern: 'src/**/*.js', included: false},
       {pattern: 'test/**/*Spec.js', included: false}
@@ -30,14 +31,19 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
+        'src/**/*.js': ['coverage']
     },
 
 
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['progress'],
+    reporters: ['progress','coverage'],
 
+    coverageReporter : {
+          type : 'html',
+          dir : 'coverage/'
+      },
 
     // web server port
     port: 9876,
@@ -58,7 +64,7 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['Chrome', 'PhantomJS'],
+    browsers: ['PhantomJS'],
 
 
     // Continuous Integration mode

@@ -1,30 +1,33 @@
-<html>
+<html ng-app="gMapApp">
     <head>
         <title>My Google Map</title>
         <link rel="stylesheet" href="node_modules/jasmine-core/lib/jasmine-core/jasmine.css"/>
+
+        <script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
         <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
         <script type="text/javascript" src="src/main/scripts/gMapApp.js"></script>
+        <script type="text/javascript" src="src/main/scripts/app.js"></script>
         <script type="text/javascript" src="test/main/scripts/gMapAppSpec.js"></script>
         <script type="text/javascript" src="node_modules/jasmine/bin/jasmine.js"></script>
         <script type="text/javascript" src="node_modules/jasmine-core/lib/jasmine-core.js"></script>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCWt71RtAyolmoKpJSV8ODwbSkWQkWW1WY"></script>
         
     </head>
-    <body>
-        <div>            
-            <input type="text" id="location" placeholder="Enter the location:"/>
+    <body ng-controller="appCtrl">
+        <div>
+            <input type="text" id="location" ng-model="location" placeholder="Enter the location:"/>
         </div>
         <div>
-            <span><input type="button" value="Get map" onClick="displayMap()"/></span>
+            <span><input type="button" value="Get map" ng-click="displayMap()"/></span>
         </div>
         <div>
             <p>Latitude:
-                <input type="text" id="latitude" readonly />
+                <input type="text" id="latitude" ng-model="latitude" readonly />
             </p>
             <p>Longitude:
-                <input type="text" id="longitude" readonly />
+                <input type="text" id="longitude" ng-model="longitude" readonly />
             </p>
         </div>
-        <div id="googleMap" style="width:100%;height:400px;"></div>
+        <div id="googleMap" ng-model="googleMap" style="width:100%;height:400px;"></div>
     </body>
 </html>
