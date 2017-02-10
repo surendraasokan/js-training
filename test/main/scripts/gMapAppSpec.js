@@ -50,7 +50,7 @@ describe("Google map Spec", function() {
         locationSpecObj.getLatitudeLongitude(callbackSpy);
     });
 
-    it("should test the Inner function", function(){
+    xit("should test the Inner function", function(){
         var geocoder = new google.maps.Geocoder();
         expect(geocoder.geocode.calls.argsFor(0)).toEqual([{},function(){}]);
     });
