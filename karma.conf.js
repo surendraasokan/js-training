@@ -20,6 +20,7 @@ module.exports = function(config) {
         'bower_components/angular-animate/angular-animate.js',
         'bower_components/jquery/dist/jquery.min.js',
         'https://maps.googleapis.com/maps/api/js?sensor=false',
+        'src/main/scripts/directives/*.js',
         'src/main/scripts/*.js',
       'test/main/scripts/*.js',
       {pattern: 'src/**/*.js', included: false},

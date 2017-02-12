@@ -2,30 +2,81 @@
  * Created by sasokan on 2/9/2017.
  */
 describe('Test App Angular', function() {
-    'use strict';
+    //'use strict';
+
+    var mockGMapModule, rootScope,$controller,$scope = {};
+
+   /* beforeEach(function() {
+        module(function($provide) {
+            $provide.value('gMapModule', mockGMapModule);
+        });
+    });*/
+
+    beforeEach(module('gMapModule'));
+    beforeEach(module('GMapApp'));
+
+    beforeEach(function() {
+        inject(function ($rootScope,_$controller_) {
+            rootScope = $rootScope;
+            $scope = rootScope.$new();
+
+            $controller = _$controller_;
+            $controller('appCtrl', { $scope : $scope });
+        });
+        spyOn($scope, '$emit');
+    });
 
     describe('Controller:appCtrl', function () {
 
-        beforeEach(module('gMapApp'));
+       it('Should have certain fields', function () {
+            expect($scope).toBeDefined();
+            //expect(scope.latitude).toBeDefined();
+            //expect(scope.longitude).toBeDefined();
+        });
 
-        var scope, appCtrlr;
-
-       beforeEach(function () {
-          inject(function ($rootScope, $controller) {
-              scope = $rootScope.$new();
-
-              appCtrlr = $controller('appCtrl', {
-                  $scope : scope
-              });
-          });
-           spyOn(scope, '$emit');
-
+       it('should test display map', function () {
+           $scope.displayMap();
+           expect($scope.displayMap).toBeDefined();
        });
 
-        it('Should have certain fields', function () {
-            expect(scope.location).toBeDefined();
-            expect(scope.latitude).toBeDefined();
-            expect(scope.longitude).toBeDefined();
-        });
+       it('should test getLatitudeLongitude', function () {
+           var lat = 0, long;
+           var location = "Chennai";
+
+           /*var getMap = function (loc) {
+               lat = loc.lat();
+               long = loc.lng();
+           };*/
+
+           var callbackSpy = jasmine.createSpy();
+
+           /*spyOn($scope,'getMap').and.callFake(function (loc) {
+               $scope.latitude = loc.lat();
+               $scope.longitude = loc.lng();
+           });*/
+
+           //$scope.getMap(loc);
+
+           //expect($scope.getMap).toHaveBeenCalled();
+           $scope.getLatitudeLongitude(callbackSpy, location);
+
+           expect(callbackSpy).toHaveBeenCalled();
+
+           //expect($scope.latitude).toEqual(13.0826802);
+       });
+
+       it('should test get Map', function() {
+          var loc = {
+             lat : function() {
+                 return "13.005"
+                } ,
+              lng : function () {
+                  return "20.005"
+              }
+          };
+          $scope.getMap(loc);
+          expect($scope.latitude).toBe("13.005");
+          expect($scope.longitude).toBe("20.005");
+       });
     });
 });

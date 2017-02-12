@@ -2,9 +2,9 @@
  * Created by sasokan on 2/8/2017.
  */
 (function (ng) {
-    var app = ng.module('gMapApp',['gMapModule']);
+    ng.module('GMapApp',['gMapModule'])
 
-    app.controller('appCtrl',['$scope', function ($scope) {
+    .controller('appCtrl',['$scope', function ($scope) {
 
         $scope.getLatitudeLongitude = function (callback, address) {
             var location;
