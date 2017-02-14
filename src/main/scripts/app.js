@@ -6,6 +6,8 @@
 
     .controller('appCtrl',['$scope', function ($scope) {
 
+        $scope.namesArr = ["suren","abi","adhava","adhira","pilot"];
+
         $scope.getLatitudeLongitude = function (callback, address) {
             var location;
             var geocoder = new google.maps.Geocoder();
@@ -27,7 +29,21 @@
             $scope.$apply(function() {
                 $scope.latitude = loc.lat() ;
                 $scope.longitude = loc.lng();
+                localStorage.locationObj =  '{'+
+                   ' "latitude" : "'+ $scope.latitude + '",' +
+                   '"longitude" : "'+ $scope.longitude + '"'
+                +'}';
             });
+        };
+
+        $scope.getBack = function() {
+          if(localStorage.locationObj) {
+              var locObj = JSON.parse(localStorage.locationObj);
+              alert("latitude : "+ locObj.latitude + "\n" +
+                    "longitude :"+ locObj.longitude);
+          } else {
+              alert("There are no values available");
+          }
         };
 
         $scope.displayMap = function() {

@@ -1,36 +1,50 @@
 <html ng-app="GMapApp">
-    <head>
-        <title>My Google Map</title>
-        <link rel="stylesheet" href="node_modules/jasmine-core/lib/jasmine-core/jasmine.css"/>
+<head>
+    <title>My Google Map</title>
+    <link rel="stylesheet" href="node_modules/jasmine-core/lib/jasmine-core/jasmine.css"/>
 
-        <script type="text/javascript" src="bower_components/angular/angular.js"></script>
-        <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
-        <script type="text/javascript" src="src/main/scripts/gMapApp.js"></script>
-        <script type="text/javascript" src="src/main/scripts/app.js"></script>
-        <script type="text/javascript" src="src/main/scripts/controllers/gMapDirectiveCtrl.js"></script>
-        <script type="text/javascript" src="src/main/scripts/directives/gMapDirective.js"></script>
-        <script type="text/javascript" src="test/main/scripts/gMapAppSpec.js"></script>
-        <script type="text/javascript" src="test/main/scripts/appSpec.js"></script>
-        <script type="text/javascript" src="node_modules/jasmine/bin/jasmine.js"></script>
-        <script type="text/javascript" src="node_modules/jasmine-core/lib/jasmine-core.js"></script>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCWt71RtAyolmoKpJSV8ODwbSkWQkWW1WY"></script>
-        
-    </head>
-    <body ng-controller="appCtrl">
-        <div>
-            <input type="text" id="location" ng-model="location" placeholder="Enter the location:"/>
-        </div>
-        <div>
-            <span><input type="button" value="Get map" ng-click="displayMap()"/></span>
-        </div>
-        <div>
-            <p>Latitude:
-                <input type="text" id="latitude" ng-model="latitude" readonly />
-            </p>
-            <p>Longitude:
-                <input type="text" id="longitude" ng-model="longitude" readonly />
-            </p>
-        </div>
-        <g-map lat="latitude" long="longitude"/>
-    </body>
+    <script type="text/javascript" src="bower_components/angular/angular.js"></script>
+    <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="src/main/scripts/gMapApp.js"></script>
+    <script type="text/javascript" src="src/main/scripts/app.js"></script>
+    <script type="text/javascript" src="src/main/scripts/controllers/gMapDirectiveCtrl.js"></script>
+    <script type="text/javascript" src="src/main/scripts/directives/gMapDirective.js"></script>
+    <script type="text/javascript" src="test/main/scripts/gMapAppSpec.js"></script>
+    <script type="text/javascript" src="test/main/scripts/appSpec.js"></script>
+    <script type="text/javascript" src="node_modules/jasmine/bin/jasmine.js"></script>
+    <script type="text/javascript" src="node_modules/jasmine-core/lib/jasmine-core.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCWt71RtAyolmoKpJSV8ODwbSkWQkWW1WY"></script>
+
+</head>
+<body ng-controller="appCtrl">
+<div>
+    <input type="text" id="location" ng-model="location" placeholder="Enter the location:"/>
+</div>
+<div>
+    <span><button ng-click="displayMap()">Get Map</button></span>
+</div>
+<div>
+    <p>Latitude:
+        <input type="text" id="latitude" ng-model="latitude" readonly/>
+    </p>
+    <p>Longitude:
+        <input type="text" id="longitude" ng-model="longitude" readonly/>
+    </p>
+</div>
+
+<div>
+    <input type="text" ng-model="nameTxt"/>
+    <ul>
+        <li ng-repeat="name in namesArr  | filter:nameTxt">
+            {{name}}
+        </li>
+    </ul>
+</div>
+
+<div>
+    <button ng-click="getBack()">Get Back values</button>
+</div>
+
+<g-map lat="latitude" long="longitude"/>
+</body>
 </html>
