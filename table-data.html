@@ -1,0 +1,16 @@
+<div>
+    <label>{{message}}</label>
+    <table>
+        <thead>
+            <th>Name</th>
+            <th>Price</th>
+        </thead>
+        <tbody>
+            <tr ng-repeat="scotch in scotches">
+                <td ng-attr-title="{{scotch.name}}">{{scotch.name}}</td>
+                <td>{{scotch.price}}</td>
+            </tr>
+
+        </tbody>
+    </table>
+</div>
