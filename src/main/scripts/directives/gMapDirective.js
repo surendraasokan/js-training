@@ -22,6 +22,7 @@
         return {
             restrict : 'EA',
             controller : 'gMapDirectiveCtrl',
+            transclude : true,
             scope : {
                 lat : '=',
                 long : '='
