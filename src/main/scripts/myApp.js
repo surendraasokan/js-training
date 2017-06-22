@@ -13,7 +13,7 @@ function getMap(result) {
     document.getElementById('longitude').value = result.geometry.location.lng();
     var mapProp= {
     center:new google.maps.LatLng(result.geometry.location.lat(),result.geometry.location.lng()),
-    zoom:8,
+    zoom:8
     };
     var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
     
