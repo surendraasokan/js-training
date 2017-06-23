@@ -1,18 +1,14 @@
 var buildFolder = './Build/',
     gulp = require('gulp'),
     fs = require('fs'),
-    /*rename = require('gulp-rename'),
-    coffee = require("gulp-coffee"),
     concat = require("gulp-concat"),
     header = require("gulp-header"),    
-    babel = require('gulp-babel'),
-    coffeelint = require("gulp-coffeelint"),
     minifyCss = require("gulp-minify-css"),
     minifyHtml = require("gulp-minify-html"),
     sass = require("gulp-sass"),
     less = require("gulp-less"),
-    uglify = require("gulp-uglify"),*/
-    //jshint = require("gulp-jshint"),
+    uglify = require("gulp-uglify"),
+    jshint = require("gulp-jshint"),
     jasmineBrowser = require('gulp-jasmine-browser');
 
 // Get version using NodeJs file system
@@ -31,7 +27,7 @@ var getCopyrightVersion = function () {
 };
 
 // Run All tasks one by one
-gulp.task('default', ['compile-coffee', 'compile-less', 'compile-sass', 'minify-css', 'minify-html', 'minify-js', 'concat', 'concat-copyright', 'concat-copyright-version', 'jsLint', 'coffeeLint', 'bundle-one', 'rename']);
+gulp.task('default', ['compile-less', 'compile-sass', 'minify-css', 'minify-html', 'minify-js', 'concat', 'jsLint','jasmine']);
 
 // Compile ECMAScript 6
 gulp.task('compile-es6', function () {
@@ -40,12 +36,6 @@ gulp.task('compile-es6', function () {
         .pipe(gulp.dest(buildFolder + 'compile-es6'));
 });
 
-// Compile CoffeeScript
-gulp.task('compile-coffee', function () {
-    gulp.src('./CoffeeScript/one.coffee')
-        .pipe(coffee())
-        .pipe(gulp.dest(buildFolder + 'compile-coffee'));
-});
 
 // Compile Less
 gulp.task('compile-less', function () {
@@ -121,35 +111,3 @@ gulp.task('jasmine', function() {
     .pipe(jasmineBrowser.server({port: 8888}));
 });
 
-// Lint CoffeeScript
-gulp.task('coffeeLint', function () {
-    gulp.src('./CoffeeScript/*.coffee')
-        .pipe(coffeelint())
-        .pipe(coffeelint.reporter());
-});
-
-// Compile CoffeeScript and rename it
-gulp.task('rename', function () {
-    gulp.src('./CoffeeScript/one.coffee')
-        .pipe(coffee())
-        .pipe(rename('renamed.js'))
-        .pipe(gulp.dest(buildFolder + 'compile-coffee'));
-});
-
-// bundleOne.js: Lint, Compile, Concat and minify JavaScript + Add Copyright and Version
-gulp.task('bundle-one', function () {
-    gulp.src('./CoffeeScript/*.coffee')
-        .pipe(coffeelint()) // lint files
-        .pipe(coffeelint.reporter('fail')) // make sure the task fails if not compliant
-        .pipe(concat('bundleOne.js')) // concat files
-        .pipe(coffee()) // compile coffee
-        .pipe(uglify()) // minify files
-        .pipe(header(getCopyrightVersion(), {
-            version: getVersion()
-        })) // Add the copyright
-        .pipe(gulp.dest(buildFolder + 'bundle')); // Dump the result
-});
-
-gulp.task('watch-coffeescript', function () {
-    gulp.watch(['./CoffeeScript/*.coffee'], ['compile-coffee']);
-});

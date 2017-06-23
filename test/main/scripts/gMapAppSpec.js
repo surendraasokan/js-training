@@ -77,7 +77,7 @@ describe("Google map Spec", function() {
     xit("expecting false for getLatitudeLongitude function", function () {
         window.google.maps.Geocoder = function() {
 
-        }
+        };
 
         expect(locationSpecObj.getLatitudeLongitude()).toBe(false);
     });

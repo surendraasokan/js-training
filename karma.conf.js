@@ -16,15 +16,16 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
         'bower_components/angular/angular.js',
+        'node_modules/jasmine/bin/jasmine.js',
         'bower_components/angular-mocks/angular-mocks.js',
         'bower_components/angular-animate/angular-animate.js',
         'bower_components/jquery/dist/jquery.min.js',
         'https://maps.googleapis.com/maps/api/js?sensor=false',
-        'src/main/scripts/directives/*.js',
         'src/main/scripts/*.js',
-      'test/main/scripts/*.js',
-      {pattern: 'src/**/*.js', included: false},
-      {pattern: 'test/**/*Spec.js', included: false}
+        'src/main/scripts/directives/*.js',
+        'test/main/scripts/*.js',
+        {pattern: 'src/**/*.js', included: false},
+        {pattern: 'test/**/*Spec.js', included: false}
     ],
 
 

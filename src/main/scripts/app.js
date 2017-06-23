@@ -31,8 +31,7 @@
                 $scope.longitude = loc.lng();
                 localStorage.locationObj =  '{'+
                    ' "latitude" : "'+ $scope.latitude + '",' +
-                   '"longitude" : "'+ $scope.longitude + '"'
-                +'}';
+                   '"longitude" : "'+ $scope.longitude + '"' +'}';
             });
         };
 

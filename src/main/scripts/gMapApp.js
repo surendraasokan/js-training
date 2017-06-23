@@ -1,4 +1,4 @@
-"use strict";
+//"use strict";
 
 var LocationClass = function (address) {
     this.getLatitudeLongitude = function () {
@@ -18,18 +18,18 @@ var LocationClass = function (address) {
             return true;
         }
         return false;
-    }
+    };
     
     this.getMap = function (lat,long) {
 
         var mapProp= {
         center:new google.maps.LatLng(lat,long),
-        zoom:10,
+        zoom:10
         };
         var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
-    }
+    };
     
-}
+};
 
 function displayMap() {
     //alert("Hi");    

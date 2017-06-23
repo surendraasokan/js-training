@@ -39,7 +39,7 @@ describe('Test App Angular', function() {
            expect($scope.displayMap).toBeDefined();
        });
 
-       it('should test getLatitudeLongitude', function () {
+       fit('should test getLatitudeLongitude', function () {
            var lat = 0, long;
            var location = "Chennai";
 
@@ -48,7 +48,9 @@ describe('Test App Angular', function() {
                long = loc.lng();
            };*/
 
-           var callbackSpy = jasmine.createSpy();
+           var callbackSpy = jasmine.createSpy("callback").and.callFake(function(loc) {
+
+           });
 
            /*spyOn($scope,'getMap').and.callFake(function (loc) {
                $scope.latitude = loc.lat();
@@ -63,6 +65,7 @@ describe('Test App Angular', function() {
            expect(callbackSpy).toHaveBeenCalled();
 
            //expect($scope.latitude).toEqual(13.0826802);
+           expect($scope.getLatitudeLongitude).toBeTruthy();
        });
 
        it('should test get Map', function() {
