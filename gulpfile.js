@@ -1,18 +1,18 @@
 var buildFolder = './Build/',
     gulp = require('gulp'),
     fs = require('fs'),
-    /*rename = require('gulp-rename'),
-    coffee = require("gulp-coffee"),
+    //rename = require('gulp-rename'),
+    //coffee = require("gulp-coffee"),
     concat = require("gulp-concat"),
     header = require("gulp-header"),    
-    babel = require('gulp-babel'),
-    coffeelint = require("gulp-coffeelint"),
+    //babel = require('gulp-babel'),
+    //coffeelint = require("gulp-coffeelint"),
     minifyCss = require("gulp-minify-css"),
     minifyHtml = require("gulp-minify-html"),
     sass = require("gulp-sass"),
     less = require("gulp-less"),
-    uglify = require("gulp-uglify"),*/
-    //jshint = require("gulp-jshint"),
+    uglify = require("gulp-uglify"),
+    jshint = require("gulp-jshint"),
     jasmineBrowser = require('gulp-jasmine-browser');
 
 // Get version using NodeJs file system
@@ -31,7 +31,7 @@ var getCopyrightVersion = function () {
 };
 
 // Run All tasks one by one
-gulp.task('default', ['compile-coffee', 'compile-less', 'compile-sass', 'minify-css', 'minify-html', 'minify-js', 'concat', 'concat-copyright', 'concat-copyright-version', 'jsLint', 'coffeeLint', 'bundle-one', 'rename']);
+gulp.task('default', ['compile-less', 'minify-css', 'minify-html', 'minify-js', 'concat', 'jsLint','jasmine']);
 
 // Compile ECMAScript 6
 gulp.task('compile-es6', function () {
@@ -49,7 +49,7 @@ gulp.task('compile-coffee', function () {
 
 // Compile Less
 gulp.task('compile-less', function () {
-    gulp.src('./Less/one.less')
+    gulp.src('./src/main/styles/one.less')
         .pipe(less())
         .pipe(gulp.dest(buildFolder + 'compile-less'));
 });
@@ -63,7 +63,7 @@ gulp.task('compile-sass', function () {
 
 // Minify Css
 gulp.task('minify-css', function () {
-    gulp.src('./Css/one.css')
+    gulp.src(buildFolder + 'compile-less/one.css')
         .pipe(minifyCss())
         .pipe(gulp.dest(buildFolder + 'minify-css'));
 });

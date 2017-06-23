@@ -15,7 +15,7 @@ var LocationClass = function (address) {
             });
         }
         //alert(""+location.lat());
-    }
+    };
     
     this.getMap = function (result) {  
         var lat = result.geometry.location.lat();
@@ -26,12 +26,12 @@ var LocationClass = function (address) {
         })();
         var mapProp= {
         center:new google.maps.LatLng(lat,long),
-        zoom:10,
+        zoom:10
         };
         var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
-    }   
+    } ;
     
-}
+};
 
 function displayMap() {
     //alert("Hi");    
