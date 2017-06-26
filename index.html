@@ -2,9 +2,13 @@
 <head>
     <title>My Google Map</title>
     <link rel="stylesheet" href="node_modules/jasmine-core/lib/jasmine-core/jasmine.css"/>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="bower_components/angular-bootstrap/ui-bootstrap-csp.css"/>
+    <link rel="stylesheet" href="Build/compile-less/gMapApp.css"/>
 
     <script type="text/javascript" src="bower_components/angular/angular.js"></script>
     <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="bower_components/angular-bootstrap/ui-bootstrap.js"></script>
     <script type="text/javascript" src="src/main/scripts/gMapApp.js"></script>
     <script type="text/javascript" src="src/main/scripts/app.js"></script>
     <script type="text/javascript" src="src/main/scripts/controllers/gMapDirectiveCtrl.js"></script>
@@ -15,38 +19,40 @@
     <script type="text/javascript" src="node_modules/jasmine-core/lib/jasmine-core.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCWt71RtAyolmoKpJSV8ODwbSkWQkWW1WY"></script>
 
+
 </head>
-<body ng-controller="appCtrl">
-<div>
-    <input type="text" id="location" ng-model="location" placeholder="Enter the location:"/>
+<body class="container main-ctxt" ng-controller="appCtrl">
+<div class="form-group">
+    <label>Enter the location:</label>
+    <input type="text" id="location" ng-model="location" placeholder="Enter the location:" class="form-control input-ctrl"/>
+    <button ng-click="displayMap()" type="button" class="btn btn-default">Get Map</button>
 </div>
-<div>
-    <span><button ng-click="displayMap()">Get Map</button></span>
-</div>
-<div>
+
+<div class="form-group">
     <p>Latitude:
-        <input type="text" id="latitude" ng-model="latitude" readonly/>
+        <input type="text" id="latitude" ng-model="latitude" class="form-control" readonly/>
     </p>
     <p>Longitude:
-        <input type="text" id="longitude" ng-model="longitude" readonly/>
+        <input type="text" id="longitude" ng-model="longitude" class="form-control" readonly/>
     </p>
 </div>
 
-<div>
+<!--<div>
     <input type="text" ng-model="nameTxt"/>
     <ul>
         <li ng-repeat="name in namesArr  | filter:nameTxt">
             {{name}}
         </li>
     </ul>
-</div>
+</div>-->
 
-<div>
-    <button ng-click="getBack()">Get Back values</button>
-</div>
-
+<!--Directive created-->
 <g-map lat="latitude" long="longitude">
     <label>Latitude:{{latitude}}</label>
 </g-map>
+
+<div>
+    <button ng-click="getBack()" type="button" class="btn btn-default">Get Back values</button>
+</div>
 </body>
 </html>

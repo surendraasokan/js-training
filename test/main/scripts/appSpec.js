@@ -39,7 +39,7 @@ describe('Test App Angular', function() {
            expect($scope.displayMap).toBeDefined();
        });
 
-       fit('should test getLatitudeLongitude', function () {
+       it('should test getLatitudeLongitude', function () {
            var lat = 0, long;
            var location = "Chennai";
 

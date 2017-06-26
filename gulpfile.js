@@ -9,7 +9,8 @@ var buildFolder = './Build/',
     less = require("gulp-less"),
     uglify = require("gulp-uglify"),
     jshint = require("gulp-jshint"),
-    jasmineBrowser = require('gulp-jasmine-browser');
+    jasmineBrowser = require('gulp-jasmine-browser'),
+    open = require('gulp-open');
 
 // Get version using NodeJs file system
 var getVersion = function () {
@@ -27,7 +28,7 @@ var getCopyrightVersion = function () {
 };
 
 // Run All tasks one by one
-gulp.task('default', ['compile-less', 'compile-sass', 'minify-css', 'minify-html', 'minify-js', 'concat', 'jsLint','jasmine']);
+gulp.task('default', ['compile-less', 'compile-sass', 'minify-css', 'minify-html', 'minify-js', 'concat', 'jsLint','jasmine','app']);
 
 // Compile ECMAScript 6
 gulp.task('compile-es6', function () {
@@ -39,7 +40,7 @@ gulp.task('compile-es6', function () {
 
 // Compile Less
 gulp.task('compile-less', function () {
-    gulp.src('./Less/one.less')
+    gulp.src('./src/main/styles/*.less')
         .pipe(less())
         .pipe(gulp.dest(buildFolder + 'compile-less'));
 });
@@ -53,7 +54,7 @@ gulp.task('compile-sass', function () {
 
 // Minify Css
 gulp.task('minify-css', function () {
-    gulp.src('./Css/one.css')
+    gulp.src(buildFolder + 'compile-less/*.css')
         .pipe(minifyCss())
         .pipe(gulp.dest(buildFolder + 'minify-css'));
 });
@@ -109,5 +110,16 @@ gulp.task('jasmine', function() {
   return gulp.src(['src/**/*.js', 'test/**/*Spec.js'])
     .pipe(jasmineBrowser.specRunner())
     .pipe(jasmineBrowser.server({port: 8888}));
+});
+
+// Open an URL in a given browser:
+
+gulp.task('app', function(){
+    var options = {
+        uri: 'http://localhost:8000/index.html',
+        app: 'chrome'
+    };
+    gulp.src(__filename)
+        .pipe(open(options));
 });
 

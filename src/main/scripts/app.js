@@ -2,7 +2,7 @@
  * Created by sasokan on 2/8/2017.
  */
 (function (ng) {
-    ng.module('GMapApp',['gMapModule'])
+    ng.module('GMapApp',['gMapModule', 'ui.bootstrap'])
 
     .controller('appCtrl',['$scope', function ($scope) {
 
