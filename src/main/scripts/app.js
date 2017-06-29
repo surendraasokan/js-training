@@ -4,12 +4,13 @@
 (function (ng) {
     ng.module('GMapApp',['gMapModule', 'ui.bootstrap'])
 
-    .controller('appCtrl',['$scope', function ($scope) {
+    .controller('appCtrl',['$scope','$q', function ($scope,$q) {
 
-        $scope.namesArr = ["suren","abi","adhava","adhira","pilot"];
+        //$scope.namesArr = ["suren","abi","adhava","adhira","pilot"];
 
-        $scope.getLatitudeLongitude = function (callback, address) {
+        $scope.getLatitudeLongitude = function (address) {
             var location;
+            var deferred = $q.defer();
             var geocoder = new google.maps.Geocoder();
             if (geocoder) {
                 geocoder.geocode({
@@ -17,16 +18,17 @@
                 }, function (results, status) {
                     if (status == google.maps.GeocoderStatus.OK) {
                         location = results[0].geometry.location;
-                        callback(location);
+                        deferred.resolve(location);
+                        return;
                     }
+                    deferred.reject();
                 });
-                return true;
             }
-            return false;
+            return deferred.promise;
         };
 
-        $scope.getMap = function (loc) {
-            $scope.$apply(function() {
+        $scope.getMap = function (location) {
+            $scope.getLatitudeLongitude(location).then(function(loc) {
                 $scope.latitude = loc.lat() ;
                 $scope.longitude = loc.lng();
                 localStorage.locationObj =  '{'+
@@ -47,7 +49,7 @@
 
         $scope.displayMap = function() {
             var address = $scope.location;
-            $scope.getLatitudeLongitude($scope.getMap,address);
+            $scope.getMap(address);
         };
     }]);
 

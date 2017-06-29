@@ -5,7 +5,10 @@ window.google = {
         Geocoder: function() {
             this.geocode = function(input, fn) {
                 setTimeout(function() {
-                    fn([{geometry: {location: 1}}], window.google.maps.GeocoderStatus.OK);
+                    fn([{geometry: {location: {
+                        lat: function() { return 1;},
+                        lng: function() { return 1;}
+                    }}}], window.google.maps.GeocoderStatus.OK);
                 }, 1000);
             }
         },
@@ -51,8 +54,8 @@ describe("Google map Spec", function() {
     });
 
     xit("should test the Inner function", function(){
-        var geocoder = new google.maps.Geocoder();
-        expect(geocoder.geocode.calls.argsFor(0)).toEqual([{},function(){}]);
+        var geocoder = new window.google.maps.Geocoder();
+        expect(geocoder.geocode.calls.argsFor(0)).toEqual([{}],function(){});
     });
 
     it("should test displayMap function", function() {
@@ -64,13 +67,22 @@ describe("Google map Spec", function() {
             }
             return HTMLElements[ID];
         });*/
-        var dummyElement = document.createElement('div');
+        var dummyElement = document.createElement('input');
         document.getElementById = jasmine.createSpy('HTML Element').and.returnValue(dummyElement);
-        document.getElementById('latitude').value = 13.0826802;
-        document.getElementById('longitude').value = 80.27071840000008;
+        //document.getElementById('latitude').value = 13.0826802;
+        //document.getElementById('longitude').value = 80.27071840000008;
+
+        spyOn(window, 'displayMap').and.callFake(function() {
+            document.getElementById('latitude').value = 13.0826802;
+            document.getElementById('longitude').value = 80.27071840000008;
+            locationSpecObj.getMap(document.getElementById('latitude').value, document.getElementById('longitude').value);
+        });
 
         displayMap();
 
+        expect(document.getElementById('latitude').value).toEqual(1);
+        expect(document.getElementById('longitude').value).toEqual(1);
+        expect(locationSpecObj.getMap).toHaveBeenCalled();
         expect(locationSpecObj.getLatitudeLongitude()).toBe(true);
     });
 
